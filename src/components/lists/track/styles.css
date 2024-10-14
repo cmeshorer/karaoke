@@ -1,0 +1,19 @@
+.Track {
+  display: flex;
+  align-items: center;
+}
+
+.Artwork {
+}
+
+.Metadata {
+  font-size: 16px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.Title {
+}
+
+.Info {
+}

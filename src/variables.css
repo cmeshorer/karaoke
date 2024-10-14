@@ -1,0 +1,27 @@
+:root {
+  --purple: #af7acc;
+  --green: #dff7e3;
+  --orange: #ffac69;
+  --beige: #f7f0ed;
+  --blue-regular: #6573db;
+  --blue-pale: #ebf2f5;
+  --greyscale-dark: #000000;
+  --greyscale-regular: #8f8888;
+  --greyscale-pale: #929596;
+  --greyscale-white: #ffffff;
+  --status-success: #68965a;
+  --status-warning: #ffac69;
+  --status-error: #eb4034;
+  --elements-animation: 400px;
+  --elements-avatar: 56px;
+  --elements-: 560px;
+  --elements-loader: 60px;
+  --radius-normal: 20px;
+  --size-normal: 20px;
+  --size-large: 60px;
+  --spacing-tiny: 5px;
+  --spacing-small: 10px;
+  --spacing-normal: 15px;
+  --spacing-large: 20px;
+  --spacing-big: 40px;
+}
