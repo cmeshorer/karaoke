@@ -13,7 +13,7 @@ const SongListScreen = (props: SongListScreenProps) => {
   return (
     <Page>
       <div style={{ alignSelf: "flex-start" }}>
-        <NavigationButton title="Return" navigateTo="/search" />
+        <NavigationButton title="Return" navigateTo="/" />
       </div>
       <div style={{ display: "flex", marginTop: 20 }}>
         <ToggleButton
