@@ -2,10 +2,18 @@ import Loader from "../../loader";
 import ErrorText from "../../texts/error";
 import { ActionButtonProps } from "./types";
 
-const ActionButton = ({ onClick, title, isDisabled }: ActionButtonProps) => {
+const ActionButton = ({
+  onClick,
+  title,
+  isDisabled,
+  isError,
+  isLoading,
+}: ActionButtonProps) => {
   return (
     <div>
-      {true ? (
+      {isLoading ? (
+        <Loader />
+      ) : (
         <button
           className="Action-button"
           disabled={isDisabled}
@@ -13,10 +21,8 @@ const ActionButton = ({ onClick, title, isDisabled }: ActionButtonProps) => {
         >
           {title}
         </button>
-      ) : (
-        <Loader />
       )}
-      {false ? (
+      {isError ? (
         <ErrorText text="Une erreur est survenue. Veuillez essayer à nouveau." />
       ) : null}
     </div>

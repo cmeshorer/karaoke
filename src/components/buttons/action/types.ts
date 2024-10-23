@@ -1,5 +1,7 @@
 export type ActionButtonProps = {
   onClick: () => void;
   title: string;
-  isDisabled?: boolean;
+  isDisabled: boolean;
+  isError: boolean;
+  isLoading: boolean;
 };

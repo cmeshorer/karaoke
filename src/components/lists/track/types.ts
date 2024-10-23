@@ -1,10 +1,5 @@
-import { Status } from "../../../screens/search/types";
+import { Track } from "../../../model";
 
 export type TrackProps = {
-  album: string;
-  artist: string;
-  artwork: string;
-  title: string;
-  year: number;
-  status: Status;
+  track: Track;
 };

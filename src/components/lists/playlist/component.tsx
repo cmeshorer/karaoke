@@ -1,4 +1,3 @@
-import { useState } from "react";
 import ActionButton from "../../buttons/action";
 import Input from "../../input";
 import Track from "../track";
@@ -19,19 +18,14 @@ const Playlist = ({ name, tracks }: PlaylistProps) => {
         }}
       />
       {tracks.map((track) => (
-        <Track
-          key={track.id}
-          album={track.album}
-          artist={track.artist}
-          title={track.title}
-          artwork={track.artwork}
-          year={track.year}
-          status={track.status}
-        />
+        <Track key={track.id} track={track} />
       ))}
       <ActionButton
         title="SAVE TO SPOTIFY"
         onClick={() => console.log("save to spotify")}
+        isDisabled={false}
+        isLoading={false}
+        isError={false}
       />
     </div>
   );

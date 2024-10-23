@@ -1,8 +1,20 @@
 import { TrackProps } from "./types";
 import TrackStatus from "../status";
-import { Status } from "../../../screens/search/types";
+import { Status } from "../../../model";
 
-const Track = ({ album, artist, artwork, title, year, status }: TrackProps) => {
+const Track = ({
+  track: {
+    album,
+    artists,
+    artwork,
+    duration,
+    explicit,
+    name,
+    popularity,
+    status,
+    year,
+  },
+}: TrackProps) => {
   return (
     <div className="Track">
       <img
@@ -13,10 +25,13 @@ const Track = ({ album, artist, artwork, title, year, status }: TrackProps) => {
         width={180}
       />
       <div className="Metadata">
-        <p className="Title">{title}</p>
+        <p className="Name">{name}</p>
+        <p className="Info">{duration}</p>
         <p className="Info">{album}</p>
-        <p className="Info">{artist}</p>
+        <p className="Info">{artists}</p>
         <p className="Info">{year}</p>
+        <p className="Info">{explicit ? "(E)" : ""}</p>
+        <p className="Info">{popularity}</p>
       </div>
       <TrackStatus
         status={status}
@@ -25,7 +40,7 @@ const Track = ({ album, artist, artwork, title, year, status }: TrackProps) => {
             status === Status.ADD
               ? "added"
               : status === Status.ADDED
-              ? ""
+              ? "already added"
               : status === Status.REMOVE
               ? "removed"
               : ""

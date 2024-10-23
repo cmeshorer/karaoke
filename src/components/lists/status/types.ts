@@ -1,4 +1,4 @@
-import { Status } from "../../../screens/search/types";
+import { Status } from "../../../model";
 
 export type TrackStatusProps = {
   onClick: () => void;

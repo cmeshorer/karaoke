@@ -1,4 +1,4 @@
-import { Tracks } from "../../../screens/search/types";
+import { Tracks } from "../../../model";
 
 export type PlaylistProps = {
   name: string;
