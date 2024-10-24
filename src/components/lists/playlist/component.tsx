@@ -1,14 +1,17 @@
+import { useKaraokeStore } from "../../../store";
 import ActionButton from "../../buttons/action";
 import Input from "../../input";
 import Track from "../track";
 import { PlaylistProps } from "./types";
 
 const Playlist = ({ name, tracks }: PlaylistProps) => {
+  const rename = useKaraokeStore().rename;
+
   return (
     <div className="Playlist">
       <Input
         placeholder="Playlist Name"
-        onChangeText={(text) => console.log("playlist name", text)}
+        onChangeText={(text) => rename(text)}
         value={name}
         style={{
           borderRadius: 0,
