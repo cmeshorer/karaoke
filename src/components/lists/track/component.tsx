@@ -16,6 +16,7 @@ const Track = ({ track }: TrackProps) => {
     year,
   } = track;
   const addTrack = useKaraokeStore().addTrack;
+  const removeTrack = useKaraokeStore().removeTrack;
 
   return (
     <div className="Track">
@@ -38,7 +39,10 @@ const Track = ({ track }: TrackProps) => {
       <TrackStatus
         status={status}
         isDisabled={status === Status.ADDED}
-        onClick={() => addTrack(track)}
+        onClick={() => {
+          if (status === Status.ADD) addTrack(track);
+          else removeTrack(track);
+        }}
       />
     </div>
   );

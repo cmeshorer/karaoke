@@ -32,6 +32,20 @@ export const useKaraokeStore = create<KaraokeState>((set) => ({
         playlistTracks: updatedPlaylistTracks,
       };
     }),
-  removeTrack: (track: Track) => set({ playlistTracks: [] }),
+  removeTrack: (track: Track) =>
+    set((state) => {
+      const updatedFoundTracks = state.foundTracks.map((foundTrack) =>
+        foundTrack.id === track.id
+          ? { ...track, status: Status.ADD }
+          : foundTrack
+      );
+      const updatedPlaylistTracks = state.playlistTracks.filter(
+        (playlistTrack) => playlistTrack.id !== track.id
+      );
+      return {
+        foundTracks: updatedFoundTracks,
+        playlistTracks: updatedPlaylistTracks,
+      };
+    }),
   rename: (name: string) => set({ playlistName: name }),
 }));
