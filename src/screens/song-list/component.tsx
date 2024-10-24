@@ -10,6 +10,8 @@ import { useKaraokeStore } from "../../store";
 const SongListScreen = (props: SongListScreenProps) => {
   const [list, setList] = useState(List.RESULTS);
   const foundTracks = useKaraokeStore().foundTracks;
+  const playlistTracks = useKaraokeStore().playlistTracks;
+  const playlistName = useKaraokeStore().playlistName;
 
   return (
     <Page>
@@ -31,7 +33,7 @@ const SongListScreen = (props: SongListScreenProps) => {
       {list === List.RESULTS ? (
         <ResultsList tracks={foundTracks} />
       ) : (
-        <Playlist name={""} tracks={[]} />
+        <Playlist name={playlistName} tracks={playlistTracks} />
       )}
     </Page>
   );

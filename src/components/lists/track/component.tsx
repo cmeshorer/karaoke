@@ -1,9 +1,10 @@
 import { TrackProps } from "./types";
 import TrackStatus from "../status";
 import { Status } from "../../../model";
+import { useKaraokeStore } from "../../../store";
 
-const Track = ({
-  track: {
+const Track = ({ track }: TrackProps) => {
+  const {
     album,
     artists,
     artwork,
@@ -13,8 +14,9 @@ const Track = ({
     popularity,
     status,
     year,
-  },
-}: TrackProps) => {
+  } = track;
+  const addTrack = useKaraokeStore().addTrack;
+
   return (
     <div className="Track">
       <img
@@ -35,17 +37,8 @@ const Track = ({
       </div>
       <TrackStatus
         status={status}
-        onClick={() =>
-          console.log(
-            status === Status.ADD
-              ? "added"
-              : status === Status.ADDED
-              ? "already added"
-              : status === Status.REMOVE
-              ? "removed"
-              : ""
-          )
-        }
+        isDisabled={status === Status.ADDED}
+        onClick={() => addTrack(track)}
       />
     </div>
   );

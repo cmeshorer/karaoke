@@ -1,10 +1,11 @@
 import { Status } from "../../../model";
 import { TrackStatusProps } from "./types";
 
-const TrackStatus = ({ onClick, status }: TrackStatusProps) => {
+const TrackStatus = ({ isDisabled, onClick, status }: TrackStatusProps) => {
   return (
     <button
       className="Song-status"
+      disabled={isDisabled}
       onClick={onClick}
       style={{
         backgroundColor:

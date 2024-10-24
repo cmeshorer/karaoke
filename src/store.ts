@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { Track, Tracks } from "./screens/search/types";
+import { Status, Track, Tracks } from "./model";
 
 type KaraokeState = {
   foundTracks: Tracks;
@@ -17,7 +17,21 @@ export const useKaraokeStore = create<KaraokeState>((set) => ({
   playlistName: "",
   populateResults: (tracks: Tracks) => set({ foundTracks: tracks }),
   addTrack: (track: Track) =>
-    set((state) => ({ playlistTracks: [...state.playlistTracks, track] })),
+    set((state) => {
+      const updatedFoundTracks = state.foundTracks.map((foundTrack) =>
+        foundTrack.id === track.id
+          ? { ...track, status: Status.ADDED }
+          : foundTrack
+      );
+      const updatedPlaylistTracks = [
+        ...state.playlistTracks,
+        { ...track, status: Status.REMOVE },
+      ];
+      return {
+        foundTracks: updatedFoundTracks,
+        playlistTracks: updatedPlaylistTracks,
+      };
+    }),
   removeTrack: (track: Track) => set({ playlistTracks: [] }),
   rename: (name: string) => set({ playlistName: name }),
 }));
