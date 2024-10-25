@@ -1,17 +1,44 @@
+import { useState } from "react";
 import { useKaraokeStore } from "../../../store";
 import ActionButton from "../../buttons/action";
 import Input from "../../input";
 import Track from "../track";
 import { PlaylistProps } from "./types";
+import { service } from "../../../service";
 
 const Playlist = ({ name, tracks }: PlaylistProps) => {
-  const rename = useKaraokeStore().rename;
+  const [isSaving, setIsSaving] = useState(false);
+  const [isError, setIsError] = useState(false);
+  const playlistName = useKaraokeStore().playlistName;
+  const renamePlaylist = useKaraokeStore().renamePlaylist;
+  const clearPlaylist = useKaraokeStore().clearPlaylist;
+  const isPlaylistIncomplete = tracks.length === 0 || playlistName === "";
+
+  const onRenamePlaylist = (name: string) => {
+    setIsError(false);
+    renamePlaylist(name);
+  };
+
+  const savePlaylist = async () => {
+    try {
+      setIsError(false);
+      setIsSaving(true);
+      const trackUris = tracks.map((track) => track.uri);
+      const playlistId = await service.playlist.create(playlistName);
+      await service.playlist.addTracks(playlistId, trackUris);
+      clearPlaylist();
+    } catch (error) {
+      setIsError(true);
+    } finally {
+      setIsSaving(false);
+    }
+  };
 
   return (
     <div className="Playlist">
       <Input
         placeholder="Playlist Name"
-        onChangeText={(text) => rename(text)}
+        onChangeText={onRenamePlaylist}
         value={name}
         style={{
           borderRadius: 0,
@@ -25,10 +52,10 @@ const Playlist = ({ name, tracks }: PlaylistProps) => {
       ))}
       <ActionButton
         title="SAVE TO SPOTIFY"
-        onClick={() => console.log("save to spotify")}
-        isDisabled={false}
-        isLoading={false}
-        isError={false}
+        onClick={savePlaylist}
+        isDisabled={isPlaylistIncomplete}
+        isLoading={isSaving}
+        isError={isError}
       />
     </div>
   );

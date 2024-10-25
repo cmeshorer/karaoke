@@ -6,10 +6,13 @@ import {
   CountryCodes,
   ExternalIds,
   ExternalUrls,
+  Followers,
+  Image,
+  Owner,
   Restrictions,
   Status,
-  Track,
   Tracks,
+  TrackUris,
 } from "./model";
 import { joinItems } from "./tools/string";
 import { formatDuration, formatReleaseDate } from "./tools/time";
@@ -58,6 +61,27 @@ export interface BackendTracksData {
   };
 }
 
+export interface BackendPlaylistData {
+  collaborative: boolean; // true if the owner allows other users to modify the playlist.
+  description: string | null; // The playlist description. Only returned for modified, verified playlists, otherwise null.
+  external_urls: ExternalUrls; // Known external URLs for this playlist.
+  followers: Followers; // Information about the followers of the playlist.
+  href: string; // A link to the Web API endpoint providing full details of the playlist.
+  id: string; // The Spotify ID for the playlist.
+  images: Image[]; // Images for the playlist. The array may be empty or contain up to three images. The images are returned by size in descending order. Note: If returned, the source URL for the image (url) is temporary and will expire in less than a day.
+  name: string; // The name of the playlist.
+  owner: Owner; // The user who owns the playlist.
+  public: boolean; // The playlist's public/private status (if it is added to the user's profile): true the playlist is public, false the playlist is private, null the playlist status is not relevant.
+  snapshot_id: string; // The version identifier for the current playlist. Can be supplied in other requests to target a specific playlist version.
+  tracks: BackendTracksData; // The tracks of the playlist.
+  type: "playlist"; // The object type: "playlist".
+  uri: string; // The Spotify URI for the playlist.
+}
+
+export interface BackendUpdatedPlaylistData {
+  snapshot_id: string; // A snapshot ID for the playlist.
+}
+
 export const tracksAdaptor = (backendTracksData: BackendTracksData) => {
   const adaptedTracks = backendTracksData.tracks.items.map((backendTrack) => ({
     album: backendTrack.album.name,
@@ -69,6 +93,7 @@ export const tracksAdaptor = (backendTracksData: BackendTracksData) => {
     name: backendTrack.name,
     popularity: backendTrack.popularity,
     status: Status.ADD,
+    uri: backendTrack.uri,
     year: formatReleaseDate(backendTrack.album.release_date),
   }));
   return adaptedTracks as Tracks;
@@ -107,9 +132,37 @@ export const service = {
     },
   },
   playlist: {
-    addTracks: async (tracks: Tracks) => {},
-    create: async (name: string) => {},
-    removeTrack: async (track: Track) => {},
-    rename: async (name: string) => {},
+    create: async (playlistName: string) => {
+      const accessToken = localStorage.getItem("accessToken");
+      const userId = "";
+      const api = `https://api.spotify.com/v1/users/${userId}/playlists`;
+      const body = { name: playlistName, public: false };
+      const headers = {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${accessToken}`,
+      };
+      const response = await axios.post(api, body, { headers });
+      const backendPlaylistData = response.data as BackendPlaylistData;
+      const playlistId = backendPlaylistData.id;
+      return playlistId;
+    },
+    addTracks: async (
+      playlistId: BackendPlaylistData["id"],
+      trackUris: TrackUris
+    ) => {
+      const accessToken = localStorage.getItem("accessToken");
+      const userId = "";
+      const api = `https://api.spotify.com/v1/users/${userId}/playlists/${playlistId}/tracks`;
+      const body = { uris: trackUris };
+      const headers = {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${accessToken}`,
+      };
+      const response = await axios.post(api, body, { headers });
+      const backendUpdatedPlaylistData =
+        response.data as BackendUpdatedPlaylistData;
+      const playlistSnapshotId = backendUpdatedPlaylistData.snapshot_id;
+      return playlistSnapshotId;
+    },
   },
 };

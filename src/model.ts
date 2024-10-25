@@ -260,6 +260,21 @@ export interface ExternalIds {
   upc: string; // Universal Product Code.
 }
 
+export interface Owner {
+  external_urls: ExternalUrls; // Known public external URLs for this user.
+  followers: Followers; // Information about the followers of this user.
+  href: string; // A link to the Web API endpoint for this user.
+  id: string; // The Spotify user ID for this user.
+  type: "user"; // The object type.
+  uri: string; // The Spotify URI for this user.
+  display_name: string | null; // The name displayed on the user's profile. null if not available.
+}
+
+export interface Followers {
+  href: string | null; // This will always be set to null, as the Web API does not support it at the moment.
+  total: number; // The total number of followers.
+}
+
 export interface Restrictions {
   reason: "market" | "product" | "explicit"; // The reason for the restriction. Albums may be restricted if the content is not available in a given market, to the user's subscription type, or when the user's account is set to not play explicit content.
   // Additional reasons may be added in the future. Note: If you use this field, make sure that your application safely handles unknown values.
@@ -313,7 +328,10 @@ export interface Track {
   name: string;
   popularity: number;
   status: Status;
+  uri: string;
   year: string;
 }
 
 export type Tracks = Track[];
+
+export type TrackUris = Track["uri"][];

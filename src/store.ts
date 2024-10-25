@@ -8,7 +8,8 @@ type KaraokeState = {
   populateResults: (tracks: Tracks) => void;
   addTrack: (track: Track) => void;
   removeTrack: (track: Track) => void;
-  rename: (name: string) => void;
+  renamePlaylist: (name: string) => void;
+  clearPlaylist: () => void;
 };
 
 export const useKaraokeStore = create<KaraokeState>((set) => ({
@@ -47,5 +48,17 @@ export const useKaraokeStore = create<KaraokeState>((set) => ({
         playlistTracks: updatedPlaylistTracks,
       };
     }),
-  rename: (name: string) => set({ playlistName: name }),
+  renamePlaylist: (name: string) => set({ playlistName: name }),
+  clearPlaylist: () =>
+    set((state) => {
+      const updatedFoundTracks = state.foundTracks.map((foundTrack) => ({
+        ...foundTrack,
+        status: Status.ADD,
+      }));
+      return {
+        foundTracks: updatedFoundTracks,
+        playlistTracks: [],
+        playlistName: "",
+      };
+    }),
 }));
