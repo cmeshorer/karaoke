@@ -24,8 +24,9 @@ const Playlist = ({ name, tracks }: PlaylistProps) => {
       setIsError(false);
       setIsSaving(true);
       const trackUris = tracks.map((track) => track.uri);
-      const playlistId = await service.playlist.create(playlistName);
-      await service.playlist.addTracks(playlistId, trackUris);
+      const userId = await service.user.profile();
+      const playlistId = await service.playlist.create(userId, playlistName);
+      await service.playlist.addTracks(userId, playlistId, trackUris);
       clearPlaylist();
     } catch (error) {
       setIsError(true);

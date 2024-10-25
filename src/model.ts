@@ -1,4 +1,4 @@
-export enum CountryCodes {
+export enum CountryCode {
   Afghanistan = "AF",
   AlandIslands = "AX",
   Albania = "AL",
@@ -275,6 +275,11 @@ export interface Followers {
   total: number; // The total number of followers.
 }
 
+export interface ExplicitContent {
+  filter_enabled: boolean; // When true, indicates that explicit content should not be played.
+  filter_locked: boolean; // When true, indicates that the explicit content setting is locked and can't be changed by the user.
+}
+
 export interface Restrictions {
   reason: "market" | "product" | "explicit"; // The reason for the restriction. Albums may be restricted if the content is not available in a given market, to the user's subscription type, or when the user's account is set to not play explicit content.
   // Additional reasons may be added in the future. Note: If you use this field, make sure that your application safely handles unknown values.
@@ -298,7 +303,7 @@ export interface Artist {
 export interface Album {
   album_type: "album" | "single" | "compilation"; // The type of the album.
   artists: Artist[]; // The artists of the album. Each artist object includes a link in href to more detailed information about the artist.
-  available_markets: CountryCodes[]; // The markets in which the album is available: ISO 3166-1 alpha-2 country codes. NOTE: an album is considered available in a market when at least 1 of its tracks is available in that market.
+  available_markets: CountryCode[]; // The markets in which the album is available: ISO 3166-1 alpha-2 country codes. NOTE: an album is considered available in a market when at least 1 of its tracks is available in that market.
   external_urls: ExternalUrls; // Known external URLs for this album.
   href: string; // A link to the Web API endpoint providing full details of the album.
   id: string; // The Spotify ID for the album.

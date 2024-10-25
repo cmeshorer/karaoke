@@ -3,7 +3,8 @@ import { Buffer } from "buffer";
 import {
   Album,
   Artist,
-  CountryCodes,
+  CountryCode,
+  ExplicitContent,
   ExternalIds,
   ExternalUrls,
   Followers,
@@ -26,7 +27,7 @@ export interface BackendTokenData {
 export interface BackendTrack {
   album: Album; // The album on which the track appears. The album object includes a link in href to full information about the album.
   artists: Artist[]; // The artists who performed the track. Each artist object includes a link in href to more detailed information about the artist.
-  available_markets: CountryCodes[]; // A list of the countries in which the track can be played, identified by their ISO 3166-1 alpha-2 code.
+  available_markets: CountryCode[]; // A list of the countries in which the track can be played, identified by their ISO 3166-1 alpha-2 code.
   disc_number: number; // The disc number (usually 1 unless the album consists of more than one disc).
   duration_ms: number; // The track length in milliseconds.
   explicit: boolean; // Whether or not the track has explicit lyrics ( true = yes it does; false = no it does not OR unknown).
@@ -82,6 +83,21 @@ export interface BackendUpdatedPlaylistData {
   snapshot_id: string; // A snapshot ID for the playlist.
 }
 
+export interface BackendUserProfileData {
+  country: CountryCode; // The country of the user, as set in the user's account profile. An ISO 3166-1 alpha-2 country code. This field is only available when the current user has granted access to the user-read-private scope.
+  display_name: string; // The name displayed on the user's profile. null if not available.
+  email: string; // The user's email address, as entered by the user when creating their account. Important! This email address is unverified; there is no proof that it actually belongs to the user. This field is only available when the current user has granted access to the user-read-email scope.
+  explicit_content: ExplicitContent; // The user's explicit content settings. This field is only available when the current user has granted access to the user-read-private scope.
+  external_urls: ExternalUrls; // Known external URLs for this user.
+  followers: Followers; // Information about the followers of the user.
+  href: string; // A link to the Web API endpoint for this user.
+  id: string; // The Spotify user ID for the user.
+  images: Image[]; // The user's profile image.
+  product: string; // The user's Spotify subscription level: "premium", "free", etc. (The subscription level "open" can be considered the same as "free".) This field is only available when the current user has granted access to the user-read-private scope.
+  type: "user"; // The object type: "user"
+  uri: string; // The Spotify URI for the user.
+}
+
 export const tracksAdaptor = (backendTracksData: BackendTracksData) => {
   const adaptedTracks = backendTracksData.tracks.items.map((backendTrack) => ({
     album: backendTrack.album.name,
@@ -132,9 +148,11 @@ export const service = {
     },
   },
   playlist: {
-    create: async (playlistName: string) => {
+    create: async (
+      userId: BackendUserProfileData["id"],
+      playlistName: string
+    ) => {
       const accessToken = localStorage.getItem("accessToken");
-      const userId = "";
       const api = `https://api.spotify.com/v1/users/${userId}/playlists`;
       const body = { name: playlistName, public: false };
       const headers = {
@@ -147,11 +165,11 @@ export const service = {
       return playlistId;
     },
     addTracks: async (
+      userId: BackendUserProfileData["id"],
       playlistId: BackendPlaylistData["id"],
       trackUris: TrackUris
     ) => {
       const accessToken = localStorage.getItem("accessToken");
-      const userId = "";
       const api = `https://api.spotify.com/v1/users/${userId}/playlists/${playlistId}/tracks`;
       const body = { uris: trackUris };
       const headers = {
@@ -163,6 +181,17 @@ export const service = {
         response.data as BackendUpdatedPlaylistData;
       const playlistSnapshotId = backendUpdatedPlaylistData.snapshot_id;
       return playlistSnapshotId;
+    },
+  },
+  user: {
+    profile: async () => {
+      const accessToken = localStorage.getItem("accessToken");
+      const api = "https://api.spotify.com/v1/me";
+      const headers = { Authorization: `Bearer ${accessToken}` };
+      const response = await axios.get(api, { headers });
+      const backendUserProfileData = response.data as BackendUserProfileData;
+      const userId = backendUserProfileData.id;
+      return userId;
     },
   },
 };
