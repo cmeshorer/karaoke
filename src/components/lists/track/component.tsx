@@ -1,7 +1,7 @@
 import { TrackProps } from "./types";
 import TrackStatus from "../status";
 import { Status } from "../../../model";
-import { useKaraokeStore } from "../../../store";
+import { useMusicStore } from "../../../store";
 
 const Track = ({ track }: TrackProps) => {
   const {
@@ -15,8 +15,8 @@ const Track = ({ track }: TrackProps) => {
     status,
     year,
   } = track;
-  const addTrack = useKaraokeStore().addTrack;
-  const removeTrack = useKaraokeStore().removeTrack;
+  const addTrack = useMusicStore().addTrack;
+  const removeTrack = useMusicStore().removeTrack;
 
   return (
     <div className="Track">

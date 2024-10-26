@@ -1,7 +1,12 @@
 import { create } from "zustand";
 import { Status, Track, Tracks } from "./model";
 
-type KaraokeState = {
+type AuthState = {
+  hasAccessToken: boolean;
+  setHasAccessToken: () => void;
+};
+
+type MusicState = {
   foundTracks: Tracks;
   playlistTracks: Tracks;
   playlistName: string;
@@ -12,7 +17,12 @@ type KaraokeState = {
   clearPlaylist: () => void;
 };
 
-export const useKaraokeStore = create<KaraokeState>((set) => ({
+export const useAuthStore = create<AuthState>((set) => ({
+  hasAccessToken: false,
+  setHasAccessToken: () => set({ hasAccessToken: true }),
+}));
+
+export const useMusicStore = create<MusicState>((set) => ({
   foundTracks: [],
   playlistTracks: [],
   playlistName: "",

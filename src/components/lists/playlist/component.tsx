@@ -1,35 +1,44 @@
+import { AxiosError } from "axios";
 import { useState } from "react";
-import { useKaraokeStore } from "../../../store";
+import { useMusicStore } from "../../../store";
 import ActionButton from "../../buttons/action";
 import Input from "../../input";
 import Track from "../track";
 import { PlaylistProps } from "./types";
 import { service } from "../../../service";
+import { isTokenExpired, isUnauthorizedError } from "../../../tools/auth";
 
 const Playlist = ({ name, tracks }: PlaylistProps) => {
   const [isSaving, setIsSaving] = useState(false);
-  const [isError, setIsError] = useState(false);
-  const playlistName = useKaraokeStore().playlistName;
-  const renamePlaylist = useKaraokeStore().renamePlaylist;
-  const clearPlaylist = useKaraokeStore().clearPlaylist;
+  const [saveError, setSaveError] = useState("");
+  const playlistName = useMusicStore().playlistName;
+  const renamePlaylist = useMusicStore().renamePlaylist;
+  const clearPlaylist = useMusicStore().clearPlaylist;
   const isPlaylistIncomplete = tracks.length === 0 || playlistName === "";
 
   const onRenamePlaylist = (name: string) => {
-    setIsError(false);
+    setSaveError("");
     renamePlaylist(name);
   };
 
-  const savePlaylist = async () => {
+  const onSavePlaylist = async () => {
     try {
-      setIsError(false);
+      setSaveError("");
       setIsSaving(true);
+      if (isTokenExpired()) await service.auth.refreshToken();
       const trackUris = tracks.map((track) => track.uri);
       const userId = await service.user.profile();
       const playlistId = await service.playlist.create(userId, playlistName);
       await service.playlist.addTracks(userId, playlistId, trackUris);
       clearPlaylist();
     } catch (error) {
-      setIsError(true);
+      if (isUnauthorizedError(error as AxiosError)) {
+        await service.auth.refreshToken();
+        onSavePlaylist();
+      } else {
+        console.error(error);
+        setSaveError("Error saving playlist.");
+      }
     } finally {
       setIsSaving(false);
     }
@@ -53,10 +62,10 @@ const Playlist = ({ name, tracks }: PlaylistProps) => {
       ))}
       <ActionButton
         title="SAVE TO SPOTIFY"
-        onClick={savePlaylist}
+        onClick={onSavePlaylist}
         isDisabled={isPlaylistIncomplete}
         isLoading={isSaving}
-        isError={isError}
+        error={saveError}
       />
     </div>
   );

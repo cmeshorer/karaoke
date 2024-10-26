@@ -3,11 +3,11 @@ import ErrorText from "../../texts/error";
 import { ActionButtonProps } from "./types";
 
 const ActionButton = ({
+  error,
+  isDisabled,
+  isLoading,
   onClick,
   title,
-  isDisabled,
-  isError,
-  isLoading,
 }: ActionButtonProps) => {
   return (
     <div>
@@ -22,9 +22,7 @@ const ActionButton = ({
           {title}
         </button>
       )}
-      {isError ? (
-        <ErrorText text="Une erreur est survenue. Veuillez essayer à nouveau." />
-      ) : null}
+      {error ? <ErrorText text={error} /> : null}
     </div>
   );
 };

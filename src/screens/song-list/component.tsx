@@ -5,13 +5,13 @@ import Page from "../../components/page";
 import { List, SongListScreenProps } from "./types";
 import Playlist from "../../components/lists/playlist";
 import ResultsList from "../../components/lists/results-list";
-import { useKaraokeStore } from "../../store";
+import { useMusicStore } from "../../store";
 
 const SongListScreen = (props: SongListScreenProps) => {
   const [list, setList] = useState(List.RESULTS);
-  const foundTracks = useKaraokeStore().foundTracks;
-  const playlistTracks = useKaraokeStore().playlistTracks;
-  const playlistName = useKaraokeStore().playlistName;
+  const foundTracks = useMusicStore().foundTracks;
+  const playlistTracks = useMusicStore().playlistTracks;
+  const playlistName = useMusicStore().playlistName;
 
   return (
     <Page>

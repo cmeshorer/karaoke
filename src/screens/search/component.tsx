@@ -1,5 +1,7 @@
+import { AxiosError } from "axios";
 import Lottie from "lottie-react";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import micAnimation from "../../assets/animations/mic.json";
 import Input from "../../components/input";
@@ -7,49 +9,58 @@ import Page from "../../components/page";
 import { SearchScreenProps } from "./types";
 import ActionButton from "../../components/buttons/action";
 import { service } from "../../service";
-import { useNavigate } from "react-router-dom";
-import { useKaraokeStore } from "../../store";
+import { useMusicStore } from "../../store";
+import { isTokenExpired, isUnauthorizedError } from "../../tools/auth";
 
 const SearchScreen = (props: SearchScreenProps) => {
   const [query, setQuery] = useState("");
   const [isSearching, setIsSearching] = useState(false);
-  const [isError, setIsError] = useState(false);
-  const isQueryEmpty = query === "";
-  const populateResults = useKaraokeStore().populateResults;
+  const [searchError, setSearchError] = useState("");
+  const populateResults = useMusicStore().populateResults;
   const navigate = useNavigate();
+  const isQueryEmpty = query === "";
 
-  const searchTracks = async () => {
+  const onSearchTracks = async () => {
     try {
-      setIsError(false);
+      setSearchError("");
       setIsSearching(true);
-      if (localStorage.getItem("accessToken") === null) {
-        await service.auth.getAccessToken();
-      }
+      if (isTokenExpired()) await service.auth.refreshToken();
       const foundTracks = await service.tracks.search(query);
       populateResults(foundTracks);
       navigate("/songs");
     } catch (error) {
-      setIsError(true);
+      if (isUnauthorizedError(error as AxiosError)) {
+        await service.auth.refreshToken();
+        onSearchTracks();
+      } else {
+        console.error(error);
+        setSearchError("Error getting tracks.");
+      }
     } finally {
       setIsSearching(false);
     }
+  };
+
+  const onSetQuery = (query: string) => {
+    setSearchError("");
+    setQuery(query);
   };
 
   return (
     <Page>
       <Input
         placeholder="Artists, Albums, Songs, ..."
-        onChangeText={(query) => setQuery(query)}
+        onChangeText={onSetQuery}
         value={query}
         isDisabled={isSearching}
       />
       <div style={{ marginTop: 20 }}>
         <ActionButton
           title="SEARCH"
-          onClick={searchTracks}
+          onClick={onSearchTracks}
           isDisabled={isQueryEmpty}
           isLoading={isSearching}
-          isError={isError}
+          error={searchError}
         />
       </div>
       {/* <Lottie
