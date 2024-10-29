@@ -1,10 +1,8 @@
 import { AxiosError } from "axios";
-import Lottie from "lottie-react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import micAnimation from "../../assets/animations/mic.json";
-import Input from "../../components/input";
+import TextField from "../../components/text-field";
 import Page from "../../components/page";
 import { SearchScreenProps } from "./types";
 import ActionButton from "../../components/buttons/action";
@@ -16,9 +14,9 @@ const SearchScreen = (props: SearchScreenProps) => {
   const [query, setQuery] = useState("");
   const [isSearching, setIsSearching] = useState(false);
   const [searchError, setSearchError] = useState("");
+  const isQueryEmpty = query === "";
   const populateResults = useMusicStore().populateResults;
   const navigate = useNavigate();
-  const isQueryEmpty = query === "";
 
   const onSearchTracks = async () => {
     try {
@@ -46,27 +44,28 @@ const SearchScreen = (props: SearchScreenProps) => {
     setQuery(query);
   };
 
+  const onClearQuery = () => {
+    setQuery("");
+  };
+
   return (
     <Page>
-      <Input
+      <TextField
         placeholder="Artists, Albums, Songs, ..."
         onChangeText={onSetQuery}
+        onClearText={onClearQuery}
+        onSubmit={isQueryEmpty ? undefined : onSearchTracks}
         value={query}
         isDisabled={isSearching}
+        className="search"
       />
-      <div style={{ marginTop: 20 }}>
-        <ActionButton
-          title="SEARCH"
-          onClick={onSearchTracks}
-          isDisabled={isQueryEmpty}
-          isLoading={isSearching}
-          error={searchError}
-        />
-      </div>
-      {/* <Lottie
-        style={{ width: 400, height: 400 }}
-        animationData={micAnimation}
-      /> */}
+      <ActionButton
+        title="SEARCH"
+        onClick={onSearchTracks}
+        isDisabled={isQueryEmpty}
+        isLoading={isSearching}
+        error={searchError}
+      />
     </Page>
   );
 };

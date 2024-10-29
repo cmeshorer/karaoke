@@ -1,4 +1,21 @@
 .Playlist {
-  background-color: white;
-  width: 500px;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--color-background-empty);
+  min-height: var(--layout-dimension-playlist);
+}
+
+.Playlist-save {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: var(--layout-spacing-medium);
+  padding-right: var(--layout-spacing-medium);
+}
+
+.Playlist-animation {
+  display: flex;
+  align-self: center;
+  flex: 1;
+  width: var(--layout-dimension-animation);
 }

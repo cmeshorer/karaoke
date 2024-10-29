@@ -1,4 +1,12 @@
-.Toggle-button {
-  height: 40px;
-  width: 180;
+.ToggleButton {
+  height: var(--layout-dimension-medium);
+  border-top-left-radius: var(--layout-radius-medium);
+  border-top-right-radius: var(--layout-radius-medium);
+  background-color: var(--color-background-empty);
+  color: var(--color-text-regular);
+}
+
+.ToggleButton--selected {
+  background-color: var(--color-background-button);
+  color: var(--color-text-inverse);
 }

@@ -2,7 +2,6 @@ import { Route, Routes } from "react-router-dom";
 import AuthScreen from "./screens/auth";
 import SearchScreen from "./screens/search";
 import SongListScreen from "./screens/song-list";
-import "./variables.css";
 import { useAuthStore } from "./store";
 
 function App() {

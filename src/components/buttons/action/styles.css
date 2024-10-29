@@ -1,7 +1,4 @@
-.Action-button {
-  border-color: var(--blue-pale);
-  border-width: 1px;
-  height: 60px;
-  width: 200px;
-  border-radius: 10px;
+.ActionButton-button {
+  height: var(--layout-dimension-medium);
+  border-radius: var(--layout-radius-medium);
 }

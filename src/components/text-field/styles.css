@@ -1,0 +1,26 @@
+.TextField {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.TextField-input--search {
+  margin-bottom: var(--layout-spacing-large);
+}
+
+.TextField-input--playlist {
+  border-radius: 0;
+  border-bottom-width: var(--layout-border-small);
+}
+
+.TextField-clear {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  right: var(--layout-spacing-medium);
+  top: var(--layout-spacing-large);
+  height: var(--layout-dimension-small);
+  width: var(--layout-dimension-small);
+  border-radius: calc(var(--layout-dimension-small) / 2);
+}

@@ -1,6 +1,6 @@
 export interface SongListScreenProps {}
 
 export enum List {
-  RESULTS = "RESULTS",
+  RESULTS = "results",
   PLAYLIST = "playlist",
 }

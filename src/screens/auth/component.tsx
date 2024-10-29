@@ -4,7 +4,6 @@ import ActionButton from "../../components/buttons/action";
 import Page from "../../components/page";
 import { AuthScreenProps } from "./types";
 import { service } from "../../service";
-import Subtitle from "../../components/texts/subtitle";
 import { useAuthStore } from "../../store";
 
 const AuthScreen = (props: AuthScreenProps) => {
@@ -51,15 +50,12 @@ const AuthScreen = (props: AuthScreenProps) => {
 
   return (
     <Page>
-      <Subtitle text="Please authorize Spotify in order to use Karaoke." />
-      <div style={{ marginTop: 20 }}>
-        <ActionButton
-          title="AUTHORIZE ACCESS"
-          onClick={onGetCode}
-          isLoading={isAuthenticating}
-          error={authError}
-        />
-      </div>
+      <ActionButton
+        title="AUTHORIZE ACCESS"
+        onClick={onGetCode}
+        isLoading={isAuthenticating}
+        error={authError}
+      />
     </Page>
   );
 };

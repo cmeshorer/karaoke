@@ -1,6 +1,25 @@
-.Song-status {
-  width: 30px;
-  height: 30px;
-  border-radius: 15px;
-  border-width: 1px;
+.TrackStatus {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: var(--layout-dimension-medium);
+  height: var(--layout-dimension-medium);
+  border-radius: calc(var(--layout-dimension-medium) / 2);
+  color: var(--color-text-regular);
+}
+
+.TrackStatus:disabled {
+  opacity: var(--values-opacity-full);
+}
+
+.TrackStatus--add {
+  background-color: var(--color-status-add);
+}
+
+.TrackStatus--added {
+  background-color: var(--color-status-added);
+}
+
+.TrackStatus--remove {
+  background-color: var(--color-status-remove);
 }

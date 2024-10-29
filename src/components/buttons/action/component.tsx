@@ -1,5 +1,6 @@
 import Loader from "../../loader";
-import ErrorText from "../../texts/error";
+import FeedbackText from "../../feedback-text";
+import { Type } from "../../feedback-text/types";
 import { ActionButtonProps } from "./types";
 
 const ActionButton = ({
@@ -15,14 +16,14 @@ const ActionButton = ({
         <Loader />
       ) : (
         <button
-          className="Action-button"
+          className="ActionButton-button"
           disabled={isDisabled}
           onClick={onClick}
         >
           {title}
         </button>
       )}
-      {error ? <ErrorText text={error} /> : null}
+      {error ? <FeedbackText message={error} type={Type.ERROR} /> : null}
     </div>
   );
 };

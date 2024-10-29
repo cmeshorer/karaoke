@@ -1,12 +1,15 @@
 import { AxiosError } from "axios";
+import Lottie from "lottie-react";
 import { useState } from "react";
+import spaceAnimation from "../../../assets/animations/space.json";
 import { useMusicStore } from "../../../store";
 import ActionButton from "../../buttons/action";
-import Input from "../../input";
+import TextField from "../../text-field";
 import Track from "../track";
 import { PlaylistProps } from "./types";
 import { service } from "../../../service";
 import { isTokenExpired, isUnauthorizedError } from "../../../tools/auth";
+import { isEvenNumber } from "../../../tools/math";
 
 const Playlist = ({ name, tracks }: PlaylistProps) => {
   const [isSaving, setIsSaving] = useState(false);
@@ -14,11 +17,17 @@ const Playlist = ({ name, tracks }: PlaylistProps) => {
   const playlistName = useMusicStore().playlistName;
   const renamePlaylist = useMusicStore().renamePlaylist;
   const clearPlaylist = useMusicStore().clearPlaylist;
-  const isPlaylistIncomplete = tracks.length === 0 || playlistName === "";
+  const isPlaylistEmpty = tracks.length === 0;
+  const isPlaylistUntitled = playlistName === "";
+  const isPlaylistIncomplete = isPlaylistEmpty || isPlaylistUntitled;
 
   const onRenamePlaylist = (name: string) => {
     setSaveError("");
     renamePlaylist(name);
+  };
+
+  const onClearName = () => {
+    renamePlaylist("");
   };
 
   const onSavePlaylist = async () => {
@@ -46,27 +55,34 @@ const Playlist = ({ name, tracks }: PlaylistProps) => {
 
   return (
     <div className="Playlist">
-      <Input
-        placeholder="Playlist Name"
-        onChangeText={onRenamePlaylist}
-        value={name}
-        style={{
-          borderRadius: 0,
-          borderWidth: 0,
-          borderBottomWidth: 1,
-          backgroundColor: "#f7f0ed",
-        }}
-      />
-      {tracks.map((track) => (
-        <Track key={track.id} track={track} />
-      ))}
-      <ActionButton
-        title="SAVE TO SPOTIFY"
-        onClick={onSavePlaylist}
-        isDisabled={isPlaylistIncomplete}
-        isLoading={isSaving}
-        error={saveError}
-      />
+      <div className="Playlist-save">
+        <TextField
+          placeholder="Playlist Name"
+          onChangeText={onRenamePlaylist}
+          onClearText={onClearName}
+          onSubmit={isPlaylistIncomplete ? undefined : onSavePlaylist}
+          value={name}
+          className={"playlist"}
+        />
+        <ActionButton
+          title="SAVE TO SPOTIFY"
+          onClick={onSavePlaylist}
+          isDisabled={isPlaylistIncomplete}
+          isLoading={isSaving}
+          error={saveError}
+        />
+      </div>
+      {isPlaylistEmpty ? (
+        <Lottie className="Playlist-animation" animationData={spaceAnimation} />
+      ) : (
+        tracks.map((track, index) => (
+          <Track
+            key={track.id}
+            track={track}
+            isHighlighted={isEvenNumber(index)}
+          />
+        ))
+      )}
     </div>
   );
 };

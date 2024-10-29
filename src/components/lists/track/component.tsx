@@ -1,9 +1,12 @@
+import { MdExplicit } from "react-icons/md";
+import { FaChartSimple } from "react-icons/fa6";
 import { TrackProps } from "./types";
 import TrackStatus from "../status";
 import { Status } from "../../../model";
 import { useMusicStore } from "../../../store";
+import { getStyle } from "../../../tools/style";
 
-const Track = ({ track }: TrackProps) => {
+const Track = ({ isHighlighted, track }: TrackProps) => {
   const {
     album,
     artists,
@@ -19,22 +22,24 @@ const Track = ({ track }: TrackProps) => {
   const removeTrack = useMusicStore().removeTrack;
 
   return (
-    <div className="Track">
-      <img
-        className="Artwork"
-        src={artwork}
-        alt="Artwork"
-        height={180}
-        width={180}
-      />
-      <div className="Metadata">
-        <p className="Name">{name}</p>
-        <p className="Info">{duration}</p>
-        <p className="Info">{album}</p>
-        <p className="Info">{artists}</p>
-        <p className="Info">{year}</p>
-        <p className="Info">{explicit ? "(E)" : ""}</p>
-        <p className="Info">{popularity}</p>
+    <div className={`Track ${isHighlighted ? "Track--highlighted" : ""}`}>
+      <img className="Track-artwork" src={artwork} alt="Artwork" />
+      <div className="Track-metadata">
+        <p className="Track-name">{name}</p>
+        <p>{duration}</p>
+        <p>{album}</p>
+        <p>{artists}</p>
+        <p>{year}</p>
+        <div className="Track-content">
+          {explicit ? (
+            <MdExplicit size={getStyle("--layout-dimension-icon-small")} />
+          ) : null}
+          {popularity > 70 ? (
+            <div className="Track-popularity">
+              <FaChartSimple size={getStyle("--layout-dimension-icon-small")} />
+            </div>
+          ) : null}
+        </div>
       </div>
       <TrackStatus
         status={status}

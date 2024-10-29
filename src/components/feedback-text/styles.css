@@ -1,0 +1,20 @@
+.FeedbackText {
+  font-size: var(--font-size-small);
+  font-style: italic;
+}
+
+.FeedbackText--infos {
+  color: var(--color-feedback-info);
+}
+
+.FeedbackText--error {
+  color: var(--color-feedback-error);
+}
+
+.FeedbackText--success {
+  color: var(--color-feedback-success);
+}
+
+.FeedbackText--warning {
+  color: var(--color-feedback-warning);
+}

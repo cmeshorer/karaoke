@@ -1,19 +1,36 @@
 .Track {
   display: flex;
+  justify-content: space-between;
   align-items: center;
+  padding: var(--layout-spacing-large);
+  background-color: var(--color-background-track);
 }
 
-.Artwork {
+.Track--highlighted {
+  background-color: var(--color-background-track-highlighted);
+  color: var(--color-text-inverse);
 }
 
-.Metadata {
-  font-size: 16px;
-  margin-left: 10px;
-  margin-right: 10px;
+.Track-artwork {
+  width: var(--layout-dimension-thumbnail);
+  border-radius: var(--layout-radius-medium);
 }
 
-.Name {
+.Track-metadata {
+  width: var(--layout-dimension-metadata);
 }
 
-.Info {
+.Track-name {
+  font-weight: var(--font-weight-bold);
+  font-size: var(--font-size-large);
+}
+
+.Track-content {
+  display: flex;
+  justify-content: center;
+  height: var(--layout-dimension-small);
+}
+
+.Track-popularity {
+  margin-left: var(--layout-spacing-medium);
 }

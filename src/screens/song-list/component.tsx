@@ -15,10 +15,8 @@ const SongListScreen = (props: SongListScreenProps) => {
 
   return (
     <Page>
-      <div style={{ alignSelf: "flex-start" }}>
-        <NavigationButton title="Return" navigateTo="/" />
-      </div>
-      <div style={{ display: "flex", marginTop: 20 }}>
+      <NavigationButton navigateTo="/" />
+      <div>
         <ToggleButton
           title="Results"
           onClick={() => setList(List.RESULTS)}
@@ -30,11 +28,13 @@ const SongListScreen = (props: SongListScreenProps) => {
           isSelected={list === List.PLAYLIST}
         />
       </div>
-      {list === List.RESULTS ? (
-        <ResultsList tracks={foundTracks} />
-      ) : (
-        <Playlist name={playlistName} tracks={playlistTracks} />
-      )}
+      <div className={`SongList-list SongList-list--${list}`}>
+        {list === List.RESULTS ? (
+          <ResultsList tracks={foundTracks} />
+        ) : (
+          <Playlist name={playlistName} tracks={playlistTracks} />
+        )}
+      </div>
     </Page>
   );
 };
