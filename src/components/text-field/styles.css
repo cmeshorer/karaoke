@@ -20,7 +20,7 @@
   position: absolute;
   right: var(--layout-spacing-medium);
   top: var(--layout-spacing-large);
-  height: var(--layout-dimension-small);
-  width: var(--layout-dimension-small);
-  border-radius: calc(var(--layout-dimension-small) / 2);
+  height: var(--layout-dimension-tiny);
+  width: var(--layout-dimension-tiny);
+  border-radius: calc(var(--layout-dimension-tiny) / 2);
 }

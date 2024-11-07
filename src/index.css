@@ -1,33 +1,33 @@
 :root {
   /* COLORS */
-  --color-primary-regular: #d6c0b3;
-  --color-secondary-regular: #ab886d;
-  --color-tertiary-regular: #8d493a;
+  --color-primary: #d6c0b3;
+  --color-secondary: #ab886d;
+  --color-tertiary: #8d493a;
   --color-yellow-dark: #f6ee7f;
   --color-yellow-regular: #f6f09a;
   --color-green-dark: #68965a;
   --color-green-regular: #709564;
   --color-red-dark: #af1740;
   --color-red-regular: #ad274a;
-  --color-blue-regular: #536493;
-  --color-purple-regular: #695988;
-  --color-beige-regular: #d5d590;
+  --color-blue: #536493;
+  --color-purple: #695988;
+  --color-beige: #d5d590;
   --color-grey-dark: #000000;
   --color-grey-regular: #8e9191;
   --color-grey-white: #ffffff;
 
-  --color-background-page: var(--color-primary-regular);
-  --color-background-results: var(--color-secondary-regular);
-  --color-background-playlist: var(--color-tertiary-regular);
+  --color-background-page: var(--color-primary);
+  --color-background-results: var(--color-secondary);
+  --color-background-playlist: var(--color-tertiary);
   --color-feedback-warning: var(--color-yellow-regular);
   --color-feedback-success: var(--color-green-regular);
   --color-feedback-error: var(--color-red-regular);
-  --color-feedback-info: var(--color-blue-regular);
+  --color-feedback-info: var(--color-blue);
   --color-status-add: var(--color-yellow-dark);
   --color-status-added: var(--color-green-dark);
   --color-status-remove: var(--color-red-dark);
-  --color-background-button: var(--color-purple-regular);
-  --color-background-track-highlighted: var(--color-beige-regular);
+  --color-background-button: var(--color-purple);
+  --color-background-track-highlighted: var(--color-beige);
   --color-shadow: var(--color-grey-dark);
   --color-text-regular: var(--color-grey-dark);
   --color-text-light: var(--color-grey-regular);
@@ -39,14 +39,16 @@
   --layout-spacing-small: 5px;
   --layout-spacing-medium: 10px;
   --layout-spacing-large: 20px;
-  --layout-dimension-small: 20px;
+  --layout-dimension-tiny: 20px;
+  --layout-dimension-small: 30px;
   --layout-dimension-medium: 40px;
   --layout-dimension-large: 60px;
+  --layout-dimension-big: 70px;
   --layout-radius-small: 4px;
   --layout-radius-medium: 8px;
   --layout-radius-large: 16px;
   --layout-border-small: 1px;
-  --layout-border-medium: 2px;
+  --layout-border-medium: 3px;
 
   --layout-dimension-animation: 50%;
   --layout-dimension-list: 50vw;
@@ -65,7 +67,7 @@
   --font-weight-regular: 300;
   --font-weight-bold: 800;
   --font-size-small: 14px;
-  --font-size-regular: 16px;
+  --font-size-medium: 16px;
   --font-size-large: 18px;
   --font-size-big: 32px;
 
@@ -97,7 +99,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: var(--font-weight-regular);
-  font-size: var(--font-size-regular);
+  font-size: var(--font-size-medium);
 }
 
 h1 {
@@ -141,7 +143,7 @@ input {
   width: var(--layout-dimension-textfield);
   height: var(--layout-dimension-large);
   padding-right: calc(
-    var(--layout-spacing-medium) + var(--layout-dimension-small)
+    var(--layout-spacing-medium) + var(--layout-dimension-tiny)
   );
   border-radius: var(--layout-radius-large);
   transition: var(--animation-shadow);

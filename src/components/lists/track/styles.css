@@ -28,7 +28,7 @@
 .Track-content {
   display: flex;
   justify-content: center;
-  height: var(--layout-dimension-small);
+  height: var(--layout-dimension-tiny);
 }
 
 .Track-popularity {
