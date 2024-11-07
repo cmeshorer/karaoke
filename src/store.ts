@@ -1,6 +1,11 @@
 import { create } from "zustand";
 import { Status, Track, Tracks } from "./model";
 
+type ThemeState = {
+  isDarkTheme: boolean;
+  setIsDarkTheme: (isDarkTheme: boolean) => void;
+};
+
 type AuthState = {
   hasAccessToken: boolean;
   setHasAccessToken: () => void;
@@ -16,6 +21,11 @@ type MusicState = {
   renamePlaylist: (name: string) => void;
   clearPlaylist: () => void;
 };
+
+export const useThemeStore = create<ThemeState>((set) => ({
+  isDarkTheme: false,
+  setIsDarkTheme: (isDarkTheme) => set({ isDarkTheme }),
+}));
 
 export const useAuthStore = create<AuthState>((set) => ({
   hasAccessToken: false,

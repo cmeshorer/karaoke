@@ -5,7 +5,7 @@ import { getStyle } from "../../../tools/style";
 
 const NavigationButton = ({ navigateTo }: NavigationButtonProps) => {
   return (
-    <Link to={navigateTo}>
+    <Link className="NavigationButton" to={navigateTo}>
       <BsArrowLeft size={getStyle("--layout-dimension-icon-large")} />
     </Link>
   );

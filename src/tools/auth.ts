@@ -1,7 +1,7 @@
 import { AxiosError } from "axios";
 
 /**
- * Store token data in local storage
+ * Save token data in local storage
  * @param {string} accessToken The access token
  * @param {number} expiresIn The expiration duration
  * @param {string} refreshToken The refresh token

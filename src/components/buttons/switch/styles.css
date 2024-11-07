@@ -1,0 +1,35 @@
+.Switch {
+  position: relative;
+  width: var(--layout-dimension-big);
+  height: calc(var(--layout-dimension-small) + 2 * var(--layout-border-medium));
+  border-radius: var(--layout-dimension-small);
+  transition: var(--animation-transition);
+  background-color: var(--color-background-empty);
+}
+
+.Switch--checked {
+  background-color: var(--color-background-button);
+}
+
+.Switch-handle {
+  position: absolute;
+  background-color: var(--color-background-button);
+  height: var(--layout-dimension-small);
+  width: var(--layout-dimension-small);
+  border-radius: calc(var(--layout-dimension-small) / 2);
+  top: var(--layout-border-medium);
+  left: var(--layout-border-medium);
+  transition: var(--animation-transition);
+}
+
+.Switch-handle--checked {
+  background-color: var(--color-background-empty);
+  left: calc(
+    var(--layout-dimension-big) - var(--layout-dimension-small) -
+      var(--layout-border-medium)
+  );
+}
+
+.Switch-input {
+  display: none;
+}

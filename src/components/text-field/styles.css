@@ -11,6 +11,7 @@
 .TextField-input--playlist {
   border-radius: 0;
   border-bottom-width: var(--layout-border-small);
+  background-color: transparent;
 }
 
 .TextField-clear {
