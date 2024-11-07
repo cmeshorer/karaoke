@@ -1,9 +1,9 @@
-import { ToggleButtonProps } from "./types";
+import { ToggleProps } from "./types";
 
-const ToggleButton = ({ isSelected, onClick, title }: ToggleButtonProps) => {
+const Toggle = ({ isSelected, onClick, title }: ToggleProps) => {
   return (
     <button
-      className={`ToggleButton ${isSelected ? "ToggleButton--selected" : ""}`}
+      className={`Toggle ${isSelected ? "Toggle--selected" : ""}`}
       onClick={onClick}
     >
       {title}
@@ -11,4 +11,4 @@ const ToggleButton = ({ isSelected, onClick, title }: ToggleButtonProps) => {
   );
 };
 
-export default ToggleButton;
+export default Toggle;

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import NavigationButton from "../../components/buttons/navigation";
-import ToggleButton from "../../components/buttons/toggle";
+import Toggle from "../../components/buttons/toggle";
 import Page from "../../components/page";
 import { List, SongListScreenProps } from "./types";
 import Playlist from "../../components/lists/playlist";
@@ -15,14 +15,16 @@ const SongListScreen = (props: SongListScreenProps) => {
 
   return (
     <Page>
-      <NavigationButton navigateTo="/" />
+      <div className="SongList-navigation">
+        <NavigationButton navigateTo="/" />
+      </div>
       <div>
-        <ToggleButton
+        <Toggle
           title="Results"
           onClick={() => setList(List.RESULTS)}
           isSelected={list === List.RESULTS}
         />
-        <ToggleButton
+        <Toggle
           title="Playlist"
           onClick={() => setList(List.PLAYLIST)}
           isSelected={list === List.PLAYLIST}

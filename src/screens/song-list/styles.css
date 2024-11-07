@@ -1,3 +1,7 @@
+.SongList-navigation {
+  align-self: flex-start;
+}
+
 .SongList-list {
   width: var(--layout-dimension-list);
   padding: var(--layout-spacing-small);

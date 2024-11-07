@@ -1,6 +1,6 @@
-import ToggleButton from "./component";
+import Toggle from "./component";
 import "./styles.css";
-import { ToggleButtonProps } from "./types";
+import { ToggleProps } from "./types";
 
-export default ToggleButton;
-export type { ToggleButtonProps };
+export default Toggle;
+export type { ToggleProps };
