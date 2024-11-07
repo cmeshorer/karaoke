@@ -12,6 +12,7 @@
   --color-blue: #536493;
   --color-purple: #695988;
   --color-beige: #d5d590;
+  --color-orange: #ff9c73;
   --color-grey-dark: #000000;
   --color-grey-regular: #8e9191;
   --color-grey-white: #ffffff;
@@ -22,6 +23,7 @@
   --color-purple-darktheme: #115d6d;
   --color-beige-darktheme: #211951;
   --color-grey-white-darktheme: #f5f5f5;
+  --color-orange-darktheme: #cb9df0;
 
   --color-background-page: var(--color-primary);
   --color-background-results: var(--color-secondary);
@@ -101,9 +103,14 @@
   --color-background-track-highlighted: var(--color-beige-darktheme);
   --color-background-track: var(--color-grey-white-darktheme);
   --color-background-empty: var(--color-grey-white-darktheme);
+
   h1,
   h2 {
     color: var(--color-text-inverse);
+  }
+
+  ::selection {
+    background-color: var(--color-orange-darktheme);
   }
 }
 
@@ -174,4 +181,8 @@ input {
 
 input:hover {
   box-shadow: var(--layout-dimension-shadow) var(--color-shadow);
+}
+
+::selection {
+  background-color: var(--color-orange);
 }
