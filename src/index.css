@@ -13,11 +13,12 @@
   --color-purple: #695988;
   --color-beige: #d5d590;
   --color-orange: #ff9c73;
-  --color-grey-dark: #000000;
+  --color-grey-black: #000000;
+  --color-grey-dark: #2e2e2e;
   --color-grey-regular: #8e9191;
   --color-grey-white: #ffffff;
 
-  --color-primary-darktheme: #060606;
+  --color-primary-darktheme: #111111;
   --color-secondary-darktheme: #332941;
   --color-tertiary-darktheme: #3e0169;
   --color-purple-darktheme: #115d6d;
@@ -38,7 +39,7 @@
   --color-background-button: var(--color-purple);
   --color-background-track-highlighted: var(--color-beige);
   --color-shadow: var(--color-grey-dark);
-  --color-text-regular: var(--color-grey-dark);
+  --color-text-regular: var(--color-grey-black);
   --color-text-light: var(--color-grey-regular);
   --color-text-inverse: var(--color-grey-white);
   --color-background-track: var(--color-grey-white);

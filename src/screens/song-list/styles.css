@@ -4,14 +4,14 @@
 
 .SongList-list {
   width: var(--layout-dimension-list);
-  padding: var(--layout-spacing-small);
+  border: var(--layout-border-medium) solid;
   border-radius: var(--layout-radius-small);
 }
 
 .SongList-list--results {
-  background-color: var(--color-background-results);
+  border-color: var(--color-background-results);
 }
 
 .SongList-list--playlist {
-  background-color: var(--color-background-playlist);
+  border-color: var(--color-background-playlist);
 }

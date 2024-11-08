@@ -2,6 +2,7 @@
   height: var(--layout-dimension-medium);
   border-top-left-radius: var(--layout-radius-medium);
   border-top-right-radius: var(--layout-radius-medium);
+  padding: var(--layout-spacing-medium);
   background-color: var(--color-background-empty);
   color: var(--color-text-regular);
 }
