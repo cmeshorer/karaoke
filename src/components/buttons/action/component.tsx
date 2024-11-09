@@ -11,18 +11,20 @@ const ActionButton = ({
   title,
 }: ActionButtonProps) => {
   return (
-    <div>
-      {isLoading ? (
-        <Loader />
-      ) : (
-        <button
-          className="ActionButton-button"
-          disabled={isDisabled}
-          onClick={onClick}
-        >
-          {title}
-        </button>
-      )}
+    <div className="ActionButton">
+      <div className="ActionButton-button-container">
+        {isLoading ? (
+          <Loader />
+        ) : (
+          <button
+            className="ActionButton-button"
+            disabled={isDisabled}
+            onClick={onClick}
+          >
+            {title}
+          </button>
+        )}
+      </div>
       {error ? <FeedbackText message={error} type={Type.ERROR} /> : null}
     </div>
   );

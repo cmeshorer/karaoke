@@ -1,4 +1,13 @@
-.ActionButton-button {
+.ActionButton-button-container {
   height: var(--layout-dimension-medium);
+  width: var(--layout-dimension-big);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.ActionButton-button {
+  width: 100%;
+  height: 100%;
   border-radius: var(--layout-radius-medium);
 }

@@ -25,3 +25,9 @@
   width: var(--layout-dimension-tiny);
   border-radius: calc(var(--layout-dimension-tiny) / 2);
 }
+
+@media (max-width: 768px) {
+  .TextField-input--playlist {
+    width: 100%;
+  }
+}

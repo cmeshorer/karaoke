@@ -60,10 +60,10 @@
   --layout-border-small: 1px;
   --layout-border-medium: 3px;
 
-  --layout-dimension-animation: 50%;
-  --layout-dimension-list: 50vw;
+  --layout-dimension-animation: 60%;
+  --layout-dimension-list: 50%;
   --layout-dimension-metadata: 60%;
-  --layout-dimension-playlist: 60vh;
+  --layout-dimension-playlist: 65vh;
   --layout-dimension-textfield: 20vw;
   --layout-dimension-thumbnail: 30%;
   --layout-dimension-shadow: 5px 5px 5px;
@@ -95,6 +95,22 @@
   --values-degrees-full: 360deg;
 }
 
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  :root {
+    --layout-dimension-animation: 100%;
+    --layout-dimension-list: 100%;
+    --layout-dimension-metadata: 100%;
+    --layout-dimension-textfield: 80vw;
+    --layout-dimension-thumbnail: 100%;
+
+    --font-size-small: 12px;
+    --font-size-medium: 14px;
+    --font-size-large: 16px;
+    --font-size-big: 30px;
+  }
+}
+
 /* DARK MODE */
 [theme="dark"] {
   --color-background-page: var(--color-primary-darktheme);
@@ -116,6 +132,10 @@
 }
 
 /* GLOBAL */
+::selection {
+  background-color: var(--color-tangerine);
+}
+
 body {
   display: flex;
   flex-direction: column;
@@ -182,8 +202,4 @@ input {
 
 input:hover {
   box-shadow: var(--layout-dimension-shadow) var(--color-shadow);
-}
-
-::selection {
-  background-color: var(--color-tangerine);
 }

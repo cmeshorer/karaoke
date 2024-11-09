@@ -1,7 +1,7 @@
 .Loader {
-  width: var(--layout-dimension-medium);
-  height: var(--layout-dimension-medium);
-  border-radius: var(--layout-dimension-medium);
+  width: var(--layout-dimension-small);
+  height: var(--layout-dimension-small);
+  border-radius: var(--layout-dimension-small);
   border: solid transparent;
   border-top: var(--layout-border-medium) solid var(--color-background-button);
   animation: var(--animation-loader);

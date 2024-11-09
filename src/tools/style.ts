@@ -1,3 +1,6 @@
+export const maxMobileWidth = 768;
+export const minDesktopWidth = 769;
+
 /**
  * Get a CSS variable's value
  * @param  {string} variable The css variable

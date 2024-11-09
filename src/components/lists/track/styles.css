@@ -11,13 +11,20 @@
   color: var(--color-text-inverse);
 }
 
-.Track-artwork {
+.Track-artwork-container {
+  display: flex;
   width: var(--layout-dimension-thumbnail);
+}
+
+.Track-artwork {
+  width: 100%;
   border-radius: var(--layout-radius-medium);
 }
 
 .Track-metadata {
   width: var(--layout-dimension-metadata);
+  margin-left: var(--layout-spacing-small);
+  margin-right: var(--layout-spacing-small);
 }
 
 .Track-name {
@@ -33,4 +40,10 @@
 
 .Track-popularity {
   margin-left: var(--layout-spacing-medium);
+}
+
+@media (max-width: 768px) {
+  .Track {
+    flex-direction: column;
+  }
 }

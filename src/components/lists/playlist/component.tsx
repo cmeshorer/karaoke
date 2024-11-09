@@ -64,16 +64,20 @@ const Playlist = ({ name, tracks }: PlaylistProps) => {
           value={name}
           className={"playlist"}
         />
-        <ActionButton
-          title="SAVE"
-          onClick={onSavePlaylist}
-          isDisabled={isPlaylistIncomplete}
-          isLoading={isSaving}
-          error={saveError}
-        />
+        <div className="Playlist-button">
+          <ActionButton
+            title="SAVE"
+            onClick={onSavePlaylist}
+            isDisabled={isPlaylistIncomplete}
+            isLoading={isSaving}
+            error={saveError}
+          />
+        </div>
       </div>
       {isPlaylistEmpty ? (
-        <Lottie className="Playlist-animation" animationData={spaceAnimation} />
+        <div className="Playlist-animation">
+          <Lottie animationData={spaceAnimation} />
+        </div>
       ) : (
         tracks.map((track, index) => (
           <Track

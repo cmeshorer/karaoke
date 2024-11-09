@@ -110,7 +110,7 @@ export const tracksAdaptor = (backendTracksData: BackendTracksData) => {
   const adaptedTracks = backendTracksData.tracks.items.map((backendTrack) => ({
     album: backendTrack.album.name,
     artists: joinItems(backendTrack.artists.map((artist) => artist.name)),
-    artwork: backendTrack.album.images[0].url,
+    artworks: backendTrack.album.images.map((image) => image.url),
     duration: formatDuration(backendTrack.duration_ms),
     explicit: backendTrack.explicit,
     id: backendTrack.id,

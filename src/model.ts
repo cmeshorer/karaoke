@@ -326,7 +326,7 @@ export enum Status {
 export interface Track {
   album: string;
   artists: string;
-  artwork: string;
+  artworks: Image["url"][];
   duration: string;
   explicit: boolean;
   id: string;
