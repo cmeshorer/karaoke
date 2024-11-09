@@ -1,6 +1,6 @@
 # ℹ️ Introduction
 
-This is an app for creating & exporting Spotify playlists. It was built using React and the Spotify Web API. It is intended to evolve into a real Karaoke (カラオケ) 🎤 machine that would allow users to view lyrics and sing along to their favorite tunes.
+This is an app that reimagines Spotify playlist creation. It was built using React and the Spotify Web API. It is intended to evolve into a real Karaoke (カラオケ) 🎤 machine that would allow users to view lyrics to their favorite songs, in a colorful environment synched to the playlist "mood". The app will also enable 3D visualization of relevant API data, to get a deeper understanding of the music.
 
 # ✅ Features
 
@@ -9,15 +9,28 @@ This is an app for creating & exporting Spotify playlists. It was built using Re
 - Add songs to a new playlist
 - Name, edit and export playlist to Spotify account
 - View app in Dark Mode
+- Responsive Design
 
 # ⭐️ Future work
 
 - Reorder playlist tracks
 - Display lyrics
+- Playback songs
+- Party Mode
 - Synched animations
-- etc.
+- Data visualization
 
-# 💾 Technical
+# 🚀 Technologies
+- Spotify Web API
+- Axios
+- Dotenv
+- Lottie React
+- React Icons
+- React Responsive
+- React Router
+- Zustand
+
+# 💾 Guide
 
 ### Required stack
 
