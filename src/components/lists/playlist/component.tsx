@@ -65,7 +65,7 @@ const Playlist = ({ name, tracks }: PlaylistProps) => {
           className={"playlist"}
         />
         <ActionButton
-          title="SAVE TO SPOTIFY"
+          title="SAVE"
           onClick={onSavePlaylist}
           isDisabled={isPlaylistIncomplete}
           isLoading={isSaving}

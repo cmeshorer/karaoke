@@ -20,12 +20,12 @@ const SongListScreen = (props: SongListScreenProps) => {
       </div>
       <div>
         <Toggle
-          title="Results"
+          title="TRACKS"
           onClick={() => setList(List.RESULTS)}
           isSelected={list === List.RESULTS}
         />
         <Toggle
-          title="Playlist"
+          title="PLAYLIST"
           onClick={() => setList(List.PLAYLIST)}
           isSelected={list === List.PLAYLIST}
         />
