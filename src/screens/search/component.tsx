@@ -1,5 +1,6 @@
 import { AxiosError } from "axios";
 import { useState } from "react";
+import { useMediaQuery } from "react-responsive";
 import { useNavigate } from "react-router-dom";
 
 import TextField from "../../components/text-field";
@@ -9,12 +10,14 @@ import ActionButton from "../../components/buttons/action";
 import { service } from "../../service";
 import { useMusicStore } from "../../store";
 import { isTokenExpired, isUnauthorizedError } from "../../tools/auth";
+import { maxMobileWidth } from "../../tools/style";
 
 const SearchScreen = (props: SearchScreenProps) => {
   const [query, setQuery] = useState("");
   const [isSearching, setIsSearching] = useState(false);
   const [searchError, setSearchError] = useState("");
   const isQueryEmpty = query === "";
+  const isMobile = useMediaQuery({ maxWidth: maxMobileWidth });
   const populateResults = useMusicStore().populateResults;
   const navigate = useNavigate();
 
@@ -23,7 +26,7 @@ const SearchScreen = (props: SearchScreenProps) => {
       setSearchError("");
       setIsSearching(true);
       if (isTokenExpired()) await service.auth.refreshToken();
-      const foundTracks = await service.tracks.search(query);
+      const foundTracks = await service.tracks.search(query, isMobile);
       populateResults(foundTracks);
       navigate("/songs");
     } catch (error) {
