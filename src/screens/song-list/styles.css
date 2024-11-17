@@ -8,6 +8,16 @@
   border-radius: var(--layout-radius-small);
 }
 
+.SongList-feedback {
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  left: 0;
+  right: 0;
+  padding-top: var(--layout-spacing-medium);
+  padding-bottom: var(--layout-spacing-medium);
+}
+
 .SongList-list--results {
   border-color: var(--color-background-results);
 }

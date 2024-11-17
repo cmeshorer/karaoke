@@ -18,6 +18,7 @@ const SearchScreen = (props: SearchScreenProps) => {
   const [searchError, setSearchError] = useState("");
   const isQueryEmpty = query === "";
   const isMobile = useMediaQuery({ maxWidth: maxMobileWidth });
+  const page = 1;
   const populateResults = useMusicStore().populateResults;
   const navigate = useNavigate();
 
@@ -26,9 +27,9 @@ const SearchScreen = (props: SearchScreenProps) => {
       setSearchError("");
       setIsSearching(true);
       if (isTokenExpired()) await service.auth.refreshToken();
-      const foundTracks = await service.tracks.search(query, isMobile);
+      const foundTracks = await service.tracks.search(query, isMobile, page);
       populateResults(foundTracks);
-      navigate("/songs");
+      navigate("/songs", { state: { query, isMobile } });
     } catch (error) {
       if (isUnauthorizedError(error as AxiosError)) {
         await service.auth.refreshToken();

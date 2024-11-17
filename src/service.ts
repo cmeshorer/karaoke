@@ -172,10 +172,11 @@ export const service = {
     },
   },
   tracks: {
-    search: async (query: string, isMobile: boolean) => {
-      const limit = isMobile ? 22 : 44;
+    search: async (query: string, isMobile: boolean, page: number) => {
+      const limit = isMobile ? 10 : 20;
+      const offset = (page - 1) * limit;
       const encodedQuery = encodeURIComponent(query);
-      const api = `https://api.spotify.com/v1/search?type=track&limit=${limit}&q=${encodedQuery}`;
+      const api = `https://api.spotify.com/v1/search?type=track&limit=${limit}&offset=${offset}&q=${encodedQuery}`;
       const accessToken = localStorage.getItem("accessToken");
       const headers = { Authorization: `Bearer ${accessToken}` };
       const response = await axios.get(api, { headers });
