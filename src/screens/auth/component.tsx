@@ -51,7 +51,7 @@ const AuthScreen = (props: AuthScreenProps) => {
   return (
     <Page>
       <ActionButton
-        title="AUTHORIZE ACCESS"
+        title="ALLOW"
         onClick={onGetCode}
         isLoading={isAuthenticating}
         error={authError}

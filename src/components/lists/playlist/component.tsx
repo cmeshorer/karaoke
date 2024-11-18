@@ -2,7 +2,7 @@ import { AxiosError } from "axios";
 import Lottie from "lottie-react";
 import { useState } from "react";
 import spaceAnimation from "../../../assets/animations/space.json";
-import { useMusicStore } from "../../../store";
+import { useAuthStore, useMusicStore } from "../../../store";
 import ActionButton from "../../buttons/action";
 import TextField from "../../text-field";
 import Track from "../track";
@@ -14,6 +14,7 @@ import { isEvenNumber } from "../../../tools/math";
 const Playlist = ({ name, tracks }: PlaylistProps) => {
   const [isSaving, setIsSaving] = useState(false);
   const [saveError, setSaveError] = useState("");
+  const { user } = useAuthStore();
   const playlistName = useMusicStore().playlistName;
   const renamePlaylist = useMusicStore().renamePlaylist;
   const clearPlaylist = useMusicStore().clearPlaylist;
@@ -34,9 +35,10 @@ const Playlist = ({ name, tracks }: PlaylistProps) => {
     try {
       setSaveError("");
       setIsSaving(true);
+      const userId = user?.id;
+      if (!userId) throw new Error("userId is undefined.");
       if (isTokenExpired()) await service.auth.refreshToken();
       const trackUris = tracks.map((track) => track.uri);
-      const userId = await service.user.profile();
       const playlistId = await service.playlist.create(userId, playlistName);
       await service.playlist.addTracks(userId, playlistId, trackUris);
       clearPlaylist();

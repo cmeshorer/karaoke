@@ -340,3 +340,9 @@ export interface Track {
 export type Tracks = Track[];
 
 export type TrackUris = Track["uri"][];
+
+export interface UserProfile {
+  avatars: Image["url"][];
+  displayName: string;
+  id: string;
+}

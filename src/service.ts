@@ -14,6 +14,7 @@ import {
   Status,
   Tracks,
   TrackUris,
+  UserProfile,
 } from "./model";
 import { generateRandomString, joinItems } from "./tools/string";
 import { formatDuration, formatReleaseDate } from "./tools/time";
@@ -93,8 +94,8 @@ export interface BackendUpdatedPlaylistData {
 
 export interface BackendUserProfileData {
   country?: CountryCode; // The country of the user, as set in the user's account profile. An ISO 3166-1 alpha-2 country code. This field is only available when the current user has granted access to the user-read-private scope.
-  display_name: string; // The name displayed on the user's profile. null if not available.
-  email: string; // The user's email address, as entered by the user when creating their account. Important! This email address is unverified; there is no proof that it actually belongs to the user. This field is only available when the current user has granted access to the user-read-email scope.
+  display_name: string | null; // The name displayed on the user's profile. null if not available.
+  email?: string; // The user's email address, as entered by the user when creating their account. Important! This email address is unverified; there is no proof that it actually belongs to the user. This field is only available when the current user has granted access to the user-read-email scope.
   explicit_content?: ExplicitContent; // The user's explicit content settings. This field is only available when the current user has granted access to the user-read-private scope.
   external_urls: ExternalUrls; // Known external URLs for this user.
   followers: Followers; // Information about the followers of the user.
@@ -121,6 +122,17 @@ export const tracksAdaptor = (backendTracksData: BackendTracksData) => {
     year: formatReleaseDate(backendTrack.album.release_date),
   }));
   return adaptedTracks as Tracks;
+};
+
+export const userProfileAdaptor = (
+  backendUserProfileData: BackendUserProfileData
+) => {
+  const adaptedUserProfile = {
+    avatars: backendUserProfileData.images.map((image) => image.url),
+    displayName: backendUserProfileData.display_name,
+    id: backendUserProfileData.id,
+  };
+  return adaptedUserProfile as UserProfile;
 };
 
 const redirectUri = process.env.REACT_APP_REDIRECT_URI;
@@ -228,8 +240,8 @@ export const service = {
       const headers = { Authorization: `Bearer ${accessToken}` };
       const response = await axios.get(api, { headers });
       const backendUserProfileData = response.data as BackendUserProfileData;
-      const userId = backendUserProfileData.id;
-      return userId;
+      const userProfile = userProfileAdaptor(backendUserProfileData);
+      return userProfile;
     },
   },
 };

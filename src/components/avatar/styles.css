@@ -1,0 +1,25 @@
+.Avatar {
+  display: flex;
+  width: var(--layout-dimension-medium);
+  height: var(--layout-dimension-medium);
+  border-radius: var(--layout-dimension-medium);
+  margin-left: var(--layout-spacing-medium);
+  background-color: var(--color-background-avatar);
+  border: var(--layout-border-medium) solid;
+  border-color: var(--color-background-avatar);
+}
+
+.Avatar--empty {
+  align-items: center;
+}
+
+.Avatar-image {
+  width: 100%;
+  border-radius: var(--layout-dimension-medium);
+}
+
+.Avatar-name {
+  width: 100%;
+  font-size: var(--font-size-large);
+  color: var(--color-text-inverse);
+}

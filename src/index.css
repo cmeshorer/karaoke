@@ -37,6 +37,7 @@
   --color-status-added: var(--color-highland-dark);
   --color-status-remove: var(--color-brick-dark);
   --color-background-button: var(--color-rum);
+  --color-background-avatar: var(--color-bazaar);
   --color-background-track-highlighted: var(--color-bazaar);
   --color-shadow: var(--color-grey-dark);
   --color-text-regular: var(--color-grey-black);
@@ -117,6 +118,7 @@
   --color-background-results: var(--color-secondary-darktheme);
   --color-background-playlist: var(--color-tertiary-darktheme);
   --color-background-button: var(--color-rum-darktheme);
+  --color-background-avatar: var(--color-bazaar-darktheme);
   --color-background-track-highlighted: var(--color-bazaar-darktheme);
   --color-background-track: var(--color-grey-white-darktheme);
   --color-background-empty: var(--color-grey-white-darktheme);

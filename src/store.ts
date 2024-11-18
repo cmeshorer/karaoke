@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { Status, Track, Tracks } from "./model";
+import { Status, Track, Tracks, UserProfile } from "./model";
 
 type ThemeState = {
   isDarkTheme: boolean;
@@ -8,7 +8,9 @@ type ThemeState = {
 
 type AuthState = {
   hasAccessToken: boolean;
+  user: UserProfile | undefined;
   setHasAccessToken: () => void;
+  setUser: (user: UserProfile) => void;
 };
 
 type MusicState = {
@@ -29,7 +31,9 @@ export const useThemeStore = create<ThemeState>((set) => ({
 
 export const useAuthStore = create<AuthState>((set) => ({
   hasAccessToken: false,
+  user: undefined,
   setHasAccessToken: () => set({ hasAccessToken: true }),
+  setUser: (user: UserProfile) => set({ user }),
 }));
 
 export const useMusicStore = create<MusicState>((set) => ({
